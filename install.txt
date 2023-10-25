@@ -1,0 +1,9 @@
+pip install streamlit            
+pip install streamlit-chat
+pip install neo4j
+pip install openai
+pip install langchain
+pip install google-cloud-bigquery
+pip install sqlalchemy-bigquery
+pip install google-cloud-aiplatform
+pip install google-cloud-bigquery-storage

@@ -1,0 +1,19 @@
+CREATE CONSTRAINT part_id IF NOT EXISTS FOR (p:Part) REQUIRE p.part_id IS UNIQUE
+;
+CREATE CONSTRAINT category_id IF NOT EXISTS FOR (c:Category) REQUIRE c.category_id IS UNIQUE
+;
+
+CREATE INDEX part_name FOR (p:Part) ON (p.name)
+;
+CREATE INDEX category_name FOR (c:Category) ON (c.name)
+;
+
+LOAD CSV WITH HEADERS FROM 'file:///category.tsv' AS row FIELDTERMINATOR '\t' MERGE (c:Category {category_id: row.id, name: row.name})
+;
+LOAD CSV WITH HEADERS FROM 'file:///part.tsv' AS row FIELDTERMINATOR '\t' MERGE (p:Part {part_id: row.part_id, name: row.name})
+;
+
+LOAD CSV WITH HEADERS FROM 'file:///category_category.tsv' AS row FIELDTERMINATOR '\t' MERGE (c1:Category {category_id: row.from}) MERGE (c2:Category {category_id: row.to}) MERGE (c1)<-[r:IS_A_CATEGORY_OF]-(c2)
+;
+LOAD CSV WITH HEADERS FROM 'file:///category_part.tsv' AS row FIELDTERMINATOR '\t' MERGE (c:Category {category_id: row.from}) MERGE (p:Part {part_id: row.to}) MERGE (c)<-[r:BELONGS_TO]-(p)
+;

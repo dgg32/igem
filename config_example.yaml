@@ -1,0 +1,13 @@
+title: 
+subtitle: Powered by BigQuery and Neo4j
+neo4j_url: bolt://localhost:7687
+neo4j_username: neo4j
+neo4j_password: 
+neo4j_tool_description: The database behind this tool stores the categorical hierarchy of the iGEM parts. Utilize this tool when the user asks to which category a iGEM part belongs to and which upper category a category belongs to. For example, "give me 3 parts that belong to sigma70", or "to which categoris does T7 belong to?"
+OPENAI_API_KEY: 
+BigQuery_description: The BigQuery database behind this tool stores all the details of the iGEM parts. But it is not very good to reveal categorical relationships. Useful for when the user asks questions about the sequence, the name, the amount of uses, the rating and other tabular information. This is your default tool. Input should be in the form of a question containing full context
+agent_instruction: Try bigquery first. If it returns good result, return it and exit the chain. Use the other tool only if the user explicitly requests you to.
+bigquery_project_id: 
+bigquery_dataset_id: 
+bigquery_table_id: 
+GOOGLE_APPLICATION_CREDENTIALS_file: 
